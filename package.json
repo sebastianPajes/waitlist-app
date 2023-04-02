@@ -1,5 +1,5 @@
 {
-  "name": "restaurant-app",
+  "name": "waitlist-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -36,7 +36,7 @@
   },
   "scripts": {
     "start:local": "env-cmd -f .env.local react-scripts start",
-    "start": "react-scripts start",
+    "start": "PORT=3002 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
