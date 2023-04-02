@@ -10,14 +10,15 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <p>
+        API_URL: <a href={process.env.REACT_APP_API} >{process.env.REACT_APP_API}</a>
+        </p>
+        <p>
+        API_KEY: {process.env.REACT_APP_API_KEY}
+        </p>
+        <p>
+        REGION: {process.env.REACT_APP_REGION}
+        </p>
       </header>
     </div>
   );
