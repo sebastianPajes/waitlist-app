@@ -7,8 +7,7 @@ frontend:
     build:
       commands:
         - echo "REACT_APP_REGION=$REGION" >> .env
-        - echo "REACT_APP_USER_POOL_CLIENT=$USER_POOL_CLIENT" >> .env
-        - echo "REACT_APP_USER_POOL_ID=$USER_POOL_ID" >> .env
+        - echo "REACT_APP_API_KEY=$API_KEY" >> .env
         - echo "REACT_APP_API=$API" >> .env
         - npm run build
   artifacts:
