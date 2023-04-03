@@ -1,26 +1,18 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import WaitList from "./components/WaitList";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>
-        API_URL: <a href={process.env.REACT_APP_API} >{process.env.REACT_APP_API}</a>
-        </p>
-        <p>
-        API_KEY: {process.env.REACT_APP_API_KEY}
-        </p>
-        <p>
-        REGION: {process.env.REACT_APP_REGION}
-        </p>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Navigate to="/waitlist" />} />
+        <Route path="/waitlist" element={<WaitList />} />
+      </Routes>
+    </Router>
+
   );
 }
 
