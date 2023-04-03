@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const WaitList = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -8,30 +8,27 @@ const WaitList = () => {
   const [businessHours, setBusinessHours] = useState({});
   const [locationNotFound, setLocationNotFound] = useState(false);
 
-
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const locationId = searchParams.get('locationId');
+  const { locationId } = useParams();
 
   useEffect(() => {
     if (!locationId) {
-        setLocationNotFound(true);
-        setIsLoading(false)
-        return;
+      setLocationNotFound(true);
+      setIsLoading(false);
+      return;
     }
     fetch(`${process.env.REACT_APP_API}/api/internal/locations/${locationId}`, {
-        headers: {
-            "x-api-key": process.env.REACT_APP_API_KEY
-        }
+      headers: {
+        "x-api-key": process.env.REACT_APP_API_KEY
+      }
     })
       .then((response) => {
         if (!response.ok) {
-            throw new Error("Location not found");
-          }
-        return response.json()
-    })
+          throw new Error("Location not found");
+        }
+        return response.json();
+      })
       .then((data) => {
-        setWaitTime("15-20min estimated wait");
+        setWaitTime("15-20");
         setRestaurantName(data.data.location.name);
         setBusinessHours(data.data.location.businessHours);
         setIsLoading(false);
@@ -39,7 +36,7 @@ const WaitList = () => {
       .catch((error) => {
         console.error("Error fetching location data:", error);
         setLocationNotFound(true);
-        setIsLoading(false)
+        setIsLoading(false);
       });
   }, [locationId]);
 
@@ -60,7 +57,7 @@ const WaitList = () => {
     <div>
       <h1>Join the Waitlist</h1>
       <h2>{restaurantName}</h2>
-      <p>{waitTime}</p>
+      <p>{waitTime}min estimated wait</p>
       <button>Join the Queue</button>
       <h2>Restaurant Hours</h2>
       <ul>
