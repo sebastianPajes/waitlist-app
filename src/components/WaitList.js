@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import "../App.css"
 
 const WaitList = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [waitTime, setWaitTime] = useState("");
-  const [restaurantName, setRestaurantName] = useState("");
-  const [businessHours, setBusinessHours] = useState({});
+  const [location, setLocation] = useState({});
   const [locationNotFound, setLocationNotFound] = useState(false);
+  const navigate = useNavigate();
 
   const { locationId } = useParams();
 
@@ -28,9 +28,7 @@ const WaitList = () => {
         return response.json();
       })
       .then((data) => {
-        setWaitTime("15-20");
-        setRestaurantName(data.data.location.name);
-        setBusinessHours(data.data.location.businessHours);
+        setLocation(data.data.location)
         setIsLoading(false);
       })
       .catch((error) => {
@@ -39,6 +37,12 @@ const WaitList = () => {
         setIsLoading(false);
       });
   }, [locationId]);
+
+  const handleJoinQueue = () => {
+    // Navigate to the JoinQueueForm page with the locationId
+    console.log('calling handleJoinQueue')
+    navigate('join-queue')
+  };
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -54,17 +58,19 @@ const WaitList = () => {
   }
 
   return (
-    <div>
+    <div className="waitlist-container">
       <h1>Join the Waitlist</h1>
-      <h2>{restaurantName}</h2>
-      <p>{waitTime}min estimated wait</p>
-      <button>Join the Queue</button>
-      <h2>Restaurant Hours</h2>
-      <ul>
-        {Object.entries(businessHours).map(([day, hours]) => (
-          <li key={day}>{`${day} ${hours}`}</li>
+      <h2>{location.name}</h2>
+      <p>{location.defaultWaitingTime}min estimated wait</p>
+      <button onClick={handleJoinQueue}>Join the Queue</button>
+      <div className="hours-container">
+        <h2>Restaurant Hours</h2>
+        {Object.entries(location.businessHours).map(([day, hours]) => (
+          <div key={day} className="hour-item">
+            {`${day} ${hours}`}
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
