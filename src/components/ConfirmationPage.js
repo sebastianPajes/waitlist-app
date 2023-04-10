@@ -4,8 +4,8 @@ import React from "react";
 const ConfirmationPage = () => {
   return (
     <div className="confirmation">
-      <h1>Success!</h1>
-      <p>You have been added to the waitlist.</p>
+      <h1>Éxito!</h1>
+      <p>Ha sido agregado a la lista de espera.</p>
     </div>
   );
 };

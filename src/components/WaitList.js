@@ -44,6 +44,16 @@ const WaitList = () => {
     navigate('join-queue')
   };
 
+  const daysOfWeek = {
+    "Monday": "Lunes",
+    "Tuesday": "Martes",
+    "Wednesday": "Miércoles",
+    "Thursday": "Jueves",
+    "Friday": "Viernes",
+    "Saturday": "Sábado",
+    "Sunday": "Domingo"
+  };
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -51,27 +61,33 @@ const WaitList = () => {
   if (locationNotFound) {
     return (
       <div>
-        <h1>Not Found</h1>
-        <p>The location you are looking for does not exist.</p>
+        <h1>No encontrado</h1>
+        <p>La ubicación que busca no existe.</p>
       </div>
     );
   }
 
   return (
-    <div className="waitlist-container">
-      <h1>Join the Waitlist</h1>
-      <h2>{location.name}</h2>
-      <p>{location.defaultWaitingTime}min estimated wait</p>
-      <button onClick={handleJoinQueue}>Join the Queue</button>
-      <div className="hours-container">
-        <h2>Restaurant Hours</h2>
-        {Object.entries(location.businessHours).map(([day, hours]) => (
+  <div className="waitlist-container">
+    <h1>Unirse a la lista de espera</h1>
+    <h2>{location.name}</h2>
+    <p>Tiempo estimado de espera: {location.defaultWaitingTime} minutos</p>
+    <button onClick={handleJoinQueue}>Unirse a la cola</button>
+    <div className="hours-container">
+      <h2>Horario del restaurante</h2>
+      {Object.entries(location.businessHours)
+        .sort(([day1], [day2]) => {
+          const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+          return days.indexOf(day1) - days.indexOf(day2);
+        })
+        .map(([day, hours]) => (
           <div key={day} className="hour-item">
-            {`${day} ${hours}`}
+            {`${daysOfWeek[day]}: ${hours}`}
           </div>
         ))}
-      </div>
     </div>
+
+  </div>
   );
 };
 

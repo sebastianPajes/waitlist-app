@@ -51,11 +51,11 @@ const JoinQueueForm = ({ restaurantName }) => {
 
   return (
     <div className="join-queue-form">
-      <h1>Join the Waitlist</h1>
+      <h1>Unirse a la list de espera</h1>
       <h2>{restaurantName}</h2>
       <form onSubmit={handleSubmit}>
         <label>
-          Group Size:
+          Tamaño del grupo:
           <div className="group-size-buttons">
             {Array.from({ length: 10 }, (_, i) => i + 1).map((size) => (
               <button
@@ -74,7 +74,7 @@ const JoinQueueForm = ({ restaurantName }) => {
           <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
         </label>
         <label>
-          Phone Number:
+          Número de teléfono:
           <div className="phone-number-input">
             <PhoneNumberInput
               value={phoneNumber}
@@ -89,9 +89,9 @@ const JoinQueueForm = ({ restaurantName }) => {
             checked={agreeSMS}
             onChange={(e) => setAgreeSMS(e.target.checked)}
           />
-          I agree to receive transactional SMS messages
+          Acepto recibir mensajes SMS transaccionales.
         </label>
-        <button type="submit">Join the Queue</button>
+        <button type="submit">Unirse a la cola</button>
       </form>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
     </div>
