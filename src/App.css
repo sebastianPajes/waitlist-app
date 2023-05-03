@@ -167,3 +167,28 @@ button {
   cursor: pointer;
   transition: background-color 0.3s;
 }
+
+/* party tracker */
+
+.party-tracker-container {
+  width: 100%;
+  max-width: 480px; /* Adjust this value according to your desired maximum width */
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.party-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+.parties-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
